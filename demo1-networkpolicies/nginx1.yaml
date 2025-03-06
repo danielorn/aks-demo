@@ -7,14 +7,23 @@ spec:
   selector:
     matchLabels:
       app: nginx1
+      type: frontend
   template:
     metadata:
       labels:
         app: nginx1
+        type: frontend
     spec:
       containers:
       - name: nginx1
         image: nginx:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "64Mi"
+            cpu: "500m"
         ports:
         - containerPort: 80
         volumeMounts:

@@ -6,6 +6,13 @@
 kubectl get ns
 ```
 
+## List all deployments
+
+```sh
+kubectl get svc
+kubectl get svc -o wide
+```
+
 ## List all pods
 
 ```sh

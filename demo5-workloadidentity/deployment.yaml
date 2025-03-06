@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azcli-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azcli
+  template:
+    metadata:
+      labels:
+        app: azcli
+        azure.workload.identity/use: "true"
+    spec:
+      serviceAccountName: svc-app
+      containers:
+      - name: azurecli
+        image: mcr.microsoft.com/azure-cli:latest
+        command: ["/bin/sh", "-c", "trap : TERM INT; sleep infinity & wait"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "1"
