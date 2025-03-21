@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: contact@dev24.se #
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - dns01:
+        azureDNS:
+          resourceGroupName: rg-public-dns #
+          subscriptionID: d54725e5-5619-4f5e-9b61-8a513f17e43b #
+          hostedZoneName: az.dev24.se #
+          environment: AzurePublicCloud
+          managedIdentity:
+            clientID: 3397817d-8aa1-45ff-aaf4-737017580334
